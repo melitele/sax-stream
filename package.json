@@ -1,0 +1,34 @@
+{
+  "name": "sax-stream",
+  "version": "0.0.0",
+  "description": "Transform stream implemented using SAX parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/code42day/sax-stream.git"
+  },
+  "keywords": [
+    "xml",
+    "stream",
+    "sax",
+    "objects"
+  ],
+  "author": "Natalia Kowalczyk <melitele@code42day.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code42day/sax-stream/issues"
+  },
+  "homepage": "https://github.com/code42day/sax-stream",
+  "devDependencies": {
+    "jshint": "~2",
+    "mocha": "~1",
+    "should": "~3"
+  },
+  "dependencies": {
+    "sax": "~0",
+    "debug": "~0"
+  }
+}
