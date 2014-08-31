@@ -84,4 +84,23 @@ describe('xmlnode', function(){
       });
   });
 
+  it('should parse nodes with cdata', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/four.xml')
+      .pipe(xmlnode({
+        tag: 'ITEM'
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(2);
+        result[0].should.have.property('children');
+        result[0].children.A.should.have.property('value', 'abc');
+        result[0].children.B.should.have.property('value', '15');
+        result[1].children.A.should.have.property('value', 'def');
+        result[1].children.B.should.have.property('value', '16');
+        done(err);
+      });
+  });
+
 });
