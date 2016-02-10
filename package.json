@@ -1,6 +1,6 @@
 {
   "name": "sax-stream",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Transform stream implemented using SAX parser",
   "main": "index.js",
   "scripts": {
