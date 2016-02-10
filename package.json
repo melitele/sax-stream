@@ -24,11 +24,11 @@
   "homepage": "https://github.com/code42day/sax-stream",
   "devDependencies": {
     "jshint": "~2",
-    "mocha": "~1",
-    "should": "~3"
+    "mocha": "~2",
+    "should": "~8"
   },
   "dependencies": {
-    "sax": "~0",
-    "debug": "~0"
+    "sax": "~1",
+    "debug": "~2"
   }
 }
