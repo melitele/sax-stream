@@ -41,6 +41,25 @@ describe('xmlnode', function(){
       });
   });
 
+   it('should respect xml tag case', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/mixedcase.xml')
+      .pipe(xmlnode({
+        tag: 'ITEM'
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(1);
+        result[0].should.have.property('children');
+        result[0].children.A.should.have.property('value', 'abc');
+        result[0].children.B.should.have.property('value', '15');
+        done(err);
+      });
+  });
+
+ 
+
   it('should parse nodes with attributes when configured', function(done){
     var result = [];
 
@@ -66,19 +85,19 @@ describe('xmlnode', function(){
 
         a[0].should.have.property('value', 'abc');
         a[0].should.have.property('attribs');
-        a[0].attribs.ATTR.should.eql('1');
+        a[0].attribs.attr.should.eql('1');
 
         a[1].should.have.property('value', 'def');
         a[1].should.have.property('attribs');
-        a[1].attribs.ATTR.should.eql('2');
+        a[1].attribs.attr.should.eql('2');
 
         a[2].should.have.property('value', 'ghi');
         a[2].should.have.property('attribs');
-        a[2].attribs.ATTR.should.eql('3');
+        a[2].attribs.attr.should.eql('3');
 
         b.should.have.property('value', '15');
         b.should.have.property('attribs');
-        b.attribs.ATTR.should.eql('4');
+        b.attribs.attr.should.eql('4');
 
         done(err);
       });
