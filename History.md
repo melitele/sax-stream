@@ -1,4 +1,9 @@
 
+1.2.0 / 2016-02-11
+==================
+
+ * add support for strict mode and other sax options
+
 1.1.0 / 2016-02-10
 ==================
 
