@@ -14,8 +14,8 @@ one object per each selected node.
 
 ## Usage
 
-Use as any transform stream: pipe request or file stream to it, pipe it to downstream another
-transform stream or writeable handle `data` event.
+Use as any transform stream: pipe request or file stream to it, pipe it downstream to another
+transform/writeable stream or handle `data` event.
 
 ```javascript
 var saxStream = require('sax-stream');
@@ -23,6 +23,7 @@ var saxStream = require('sax-stream');
 
 request('http://blog.npmjs.org/rss')
   .pipe(saxStream({
+  	strict: true,
     tag: 'item'
   })
   .on('data', function(item) {
@@ -33,17 +34,16 @@ request('http://blog.npmjs.org/rss')
 
 ## API
 
-Create passing options object.
+Create passing options object:
 
-`tag` - name of the tag to select objects from XML file
-
-## TODO
-
-- pass more options to `Transform` stream and to `sax` parser (currently `highWaterMark` is hard
- coded at 350)
+- `tag` - name of the tag to select objects from XML file
+- `highWaterMark` - size of internal transform stream buffer - defaults to 350 objects
+- `strict` - default to false, if `true` makes sax parser to accept valid XML only
+- `trim`, `normalize`, `lowercase`, `xmlns`, `position`, `strictEntities` - passed to [sax] parser
 
 # License
 
 MIT
 
 [transform-stream]: http://nodejs.org/api/stream.html#stream_class_stream_transform
+[sax]: https://github.com/isaacs/sax-js#arguments
