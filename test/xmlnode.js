@@ -41,6 +41,54 @@ describe('xmlnode', function(){
       });
   });
 
+  it('should parse nodes with text in strict mode', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/two.xml')
+      .pipe(xmlnode({
+        strict: true,
+        tag: 'item'
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(2);
+        result[0].should.have.property('children');
+        result[0].children.a.should.have.property('value', 'abc');
+        result[0].children.b.should.have.property('value', '15');
+        result[1].children.a.should.have.property('value', 'def');
+        result[1].children.b.should.have.property('value', '16');
+        done(err);
+      });
+  });
+
+  it('should parse nodes and attributes in lowercase mode', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/three.xml')
+      .pipe(xmlnode({
+        lowercase: true,
+        tag: 'item'
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        var item, a, b;
+
+        result.should.have.length(1);
+
+        item = result[0];
+
+        a = item.children.a;
+        b = item.children.b;
+
+        a.should.have.length(3);
+        b.should.be.type('object');
+
+        a[0].attribs.attr.should.eql('1');
+
+        done(err);
+      });
+  });
+
   it('should parse nodes with attributes when configured', function(done){
     var result = [];
 
