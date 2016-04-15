@@ -151,4 +151,24 @@ describe('xmlnode', function(){
       });
   });
 
+  it('should parse script elements', function(done) {
+    var result = [];
+
+    fs.createReadStream(__dirname + '/page.html')
+      .pipe(xmlnode({
+        tag: 'SCRIPT',
+        trim: true,
+        strict: false,
+        noscript: true
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(2);
+        result[0].should.have.property('value', 'var z = 5;');
+        result[1].should.have.property('value', 'z += 3;');
+        done(err);
+      });
+
+  });
+
 });

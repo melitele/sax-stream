@@ -39,7 +39,7 @@ Create passing options object:
 - `tag` - name of the tag to select objects from XML file
 - `highWaterMark` - size of internal transform stream buffer - defaults to 350 objects
 - `strict` - default to false, if `true` makes sax parser to accept valid XML only
-- `trim`, `normalize`, `lowercase`, `xmlns`, `position`, `strictEntities` - passed to [sax] parser
+- `trim`, `normalize`, `lowercase`, `xmlns`, `position`, `strictEntities`, `noscript` - passed to [sax] parser
 
 # License
 
