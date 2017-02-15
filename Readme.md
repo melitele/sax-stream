@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/code42day/sax-stream.svg)](http://travis-ci.org/code42day/sax-stream)
+[![Build Status](https://img.shields.io/travis/melitele/sax-stream.svg)](http://travis-ci.org/melitele/sax-stream)
 [![Dependency Status](https://img.shields.io/gemnasium/code42day/sax-stream.svg)](https://gemnasium.com/code42day/sax-stream)
 [![NPM version](https://img.shields.io/npm/v/sax-stream.svg)](https://www.npmjs.org/package/sax-stream)
 

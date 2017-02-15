@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/code42day/sax-stream.git"
+    "url": "git://github.com/melitele/sax-stream.git"
   },
   "keywords": [
     "xml",
@@ -16,12 +16,16 @@
     "sax",
     "objects"
   ],
-  "author": "Natalia Kowalczyk <melitele@code42day.com>",
+  "author": {
+    "name": "Natalia Kowalczyk",
+    "email": "melitele@furkot.com",
+    "url": "https://melitele.me"
+    },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/code42day/sax-stream/issues"
+    "url": "https://github.com/melitele/sax-stream/issues"
   },
-  "homepage": "https://github.com/code42day/sax-stream",
+  "homepage": "https://github.com/melitele/sax-stream",
   "devDependencies": {
     "jshint": "~2",
     "mocha": "~2",
