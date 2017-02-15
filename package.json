@@ -1,6 +1,6 @@
 {
   "name": "sax-stream",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Transform stream implemented using SAX parser",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "name": "Natalia Kowalczyk",
     "email": "melitele@furkot.com",
     "url": "https://melitele.me"
-    },
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/melitele/sax-stream/issues"
