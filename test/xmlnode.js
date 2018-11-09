@@ -12,12 +12,12 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/one.xml')
       .pipe(xmlnode({
-        tag: 'ITEM'
+        tags: ['ITEM']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
         result.should.have.length(1);
-        result[0].should.eql({});
+        result[0].should.eql({record: {}, tag: 'ITEM'});
         done(err);
       });
   });
@@ -27,16 +27,18 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/two.xml')
       .pipe(xmlnode({
-        tag: 'ITEM'
+        tags: ['ITEM']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
         result.should.have.length(2);
-        result[0].should.have.property('children');
-        result[0].children.A.should.have.property('value', 'abc');
-        result[0].children.B.should.have.property('value', '15');
-        result[1].children.A.should.have.property('value', 'def');
-        result[1].children.B.should.have.property('value', '16');
+        result[0].should.have.property('tag', 'ITEM');
+        result[0].should.have.property('record');
+        result[0].record.should.have.property('children');
+        result[0].record.children.A.should.have.property('value', 'abc');
+        result[0].record.children.B.should.have.property('value', '15');
+        result[1].record.children.A.should.have.property('value', 'def');
+        result[1].record.children.B.should.have.property('value', '16');
         done(err);
       });
   });
@@ -47,16 +49,18 @@ describe('xmlnode', function(){
     fs.createReadStream(__dirname + '/two.xml')
       .pipe(xmlnode({
         strict: true,
-        tag: 'item'
+        tags: ['item']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
         result.should.have.length(2);
-        result[0].should.have.property('children');
-        result[0].children.a.should.have.property('value', 'abc');
-        result[0].children.b.should.have.property('value', '15');
-        result[1].children.a.should.have.property('value', 'def');
-        result[1].children.b.should.have.property('value', '16');
+        result[0].should.have.property('tag', 'item');
+        result[0].should.have.property('record');
+        result[0].record.should.have.property('children');
+        result[0].record.children.a.should.have.property('value', 'abc');
+        result[0].record.children.b.should.have.property('value', '15');
+        result[1].record.children.a.should.have.property('value', 'def');
+        result[1].record.children.b.should.have.property('value', '16');
         done(err);
       });
   });
@@ -67,7 +71,7 @@ describe('xmlnode', function(){
     fs.createReadStream(__dirname + '/three.xml')
       .pipe(xmlnode({
         lowercase: true,
-        tag: 'item'
+        tags: ['item']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -77,8 +81,10 @@ describe('xmlnode', function(){
 
         item = result[0];
 
-        a = item.children.a;
-        b = item.children.b;
+        item.should.have.property('tag', 'item');
+        item.should.have.property('record');
+        a = item.record.children.a;
+        b = item.record.children.b;
 
         a.should.have.length(3);
         b.should.be.type('object');
@@ -94,7 +100,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/three.xml')
       .pipe(xmlnode({
-        tag: 'ITEM'
+        tags: ['ITEM']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -103,11 +109,14 @@ describe('xmlnode', function(){
 
         result.should.have.length(1);
         item = result[0];
-        item.should.have.property('children');
-        item.should.not.have.property('attribs');
 
-        a = item.children.A;
-        b = item.children.B;
+        item.should.have.property('tag', 'ITEM');
+        item.should.have.property('record');
+        item.record.should.have.property('children');
+        item.record.should.not.have.property('attribs');
+
+        a = item.record.children.A;
+        b = item.record.children.B;
 
         a.should.have.length(3);
         b.should.be.type('object');
@@ -137,16 +146,73 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/four.xml')
       .pipe(xmlnode({
-        tag: 'ITEM'
+        tags: ['ITEM']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
         result.should.have.length(2);
-        result[0].should.have.property('children');
-        result[0].children.A.should.have.property('value', 'abc');
-        result[0].children.B.should.have.property('value', '15');
-        result[1].children.A.should.have.property('value', 'def');
-        result[1].children.B.should.have.property('value', '16');
+        result[0].should.have.property('record');
+        result[0].record.should.have.property('children');
+        result[0].record.children.A.should.have.property('value', 'abc');
+        result[0].record.children.B.should.have.property('value', '15');
+        result[1].record.children.A.should.have.property('value', 'def');
+        result[1].record.children.B.should.have.property('value', '16');
+        done(err);
+      });
+  });
+
+  it('should parse nodes with multiple non-nested tags', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/five.xml')
+      .pipe(xmlnode({
+        tags: ['ITEM', 'HEADER']
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(2);
+        result[0].should.have.property('record');
+        result[0].should.have.property('tag', 'HEADER');
+        result[0].record.should.have.property('children');
+        result[0].record.children.V.should.have.property('value', '1');
+
+        result[1].should.have.property('record');
+        result[1].should.have.property('tag', 'ITEM');
+        result[1].record.should.have.property('children');
+        result[1].record.children.A.should.have.property('value', 'abc');
+        result[1].record.children.B.should.have.property('value', '15');
+
+        done(err);
+      });
+  });
+
+  it('should parse nodes with multiple tags, ignoring a node while another tag is active', function(done){
+    var result = [];
+
+    fs.createReadStream(__dirname + '/six.xml')
+      .pipe(xmlnode({
+        tags: ['ITEM', 'SAMPLE']
+      }))
+      .pipe(memory(result))
+      .on('finish', function(err) {
+        result.should.have.length(3);
+        result[0].should.have.property('record');
+        result[0].should.have.property('tag', 'ITEM');
+        result[0].record.should.have.property('children');
+        result[0].record.children.A.should.have.property('value', 'abc');
+        result[0].record.children.B.should.have.property('value', '15');
+
+        result[1].should.have.property('record');
+        result[1].should.have.property('tag', 'ITEM');
+        result[1].record.should.have.property('children');
+        result[1].record.children.A.should.have.property('value', 'abc');
+        result[1].record.children.B.should.have.property('value', '15');
+
+        result[2].should.have.property('record');
+        result[2].should.have.property('tag', 'SAMPLE');
+        result[2].record.should.have.property('children');
+        result[2].record.children.C.should.have.property('value', '12');
+
         done(err);
       });
   });
@@ -156,7 +222,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/page.html')
       .pipe(xmlnode({
-        tag: 'SCRIPT',
+        tags: ['SCRIPT'],
         trim: true,
         strict: false,
         noscript: true
@@ -164,8 +230,8 @@ describe('xmlnode', function(){
       .pipe(memory(result))
       .on('finish', function(err) {
         result.should.have.length(2);
-        result[0].should.have.property('value', 'var z = 5;');
-        result[1].should.have.property('value', 'z += 3;');
+        result[0].record.should.have.property('value', 'var z = 5;');
+        result[1].record.should.have.property('value', 'z += 3;');
         done(err);
       });
 
