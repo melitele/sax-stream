@@ -12,7 +12,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/one.xml')
       .pipe(xmlnode({
-        tags: ['ITEM']
+        tag: 'ITEM'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -27,7 +27,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/two.xml')
       .pipe(xmlnode({
-        tags: ['ITEM']
+        tag: 'ITEM'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -49,7 +49,7 @@ describe('xmlnode', function(){
     fs.createReadStream(__dirname + '/two.xml')
       .pipe(xmlnode({
         strict: true,
-        tags: ['item']
+        tag: 'item'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -71,7 +71,7 @@ describe('xmlnode', function(){
     fs.createReadStream(__dirname + '/three.xml')
       .pipe(xmlnode({
         lowercase: true,
-        tags: ['item']
+        tag: 'item'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -100,7 +100,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/three.xml')
       .pipe(xmlnode({
-        tags: ['ITEM']
+        tag: 'ITEM'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -146,7 +146,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/four.xml')
       .pipe(xmlnode({
-        tags: ['ITEM']
+        tag: 'ITEM'
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -166,7 +166,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/five.xml')
       .pipe(xmlnode({
-        tags: ['ITEM', 'HEADER']
+        tag: ['ITEM', 'HEADER']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -191,7 +191,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/six.xml')
       .pipe(xmlnode({
-        tags: ['ITEM', 'SAMPLE']
+        tag: ['ITEM', 'SAMPLE']
       }))
       .pipe(memory(result))
       .on('finish', function(err) {
@@ -222,7 +222,7 @@ describe('xmlnode', function(){
 
     fs.createReadStream(__dirname + '/page.html')
       .pipe(xmlnode({
-        tags: ['SCRIPT'],
+        tag: 'SCRIPT',
         trim: true,
         strict: false,
         noscript: true
