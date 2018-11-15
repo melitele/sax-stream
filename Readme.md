@@ -24,7 +24,7 @@ var saxStream = require('sax-stream');
 request('http://blog.npmjs.org/rss')
   .pipe(saxStream({
   	strict: true,
-    tag: ['item', 'sample']
+    tag: 'item'
   })
   .on('data', function(item) {
     console.log(item);
@@ -36,7 +36,7 @@ request('http://blog.npmjs.org/rss')
 
 Create passing options object:
 
-- `tag` - names of the tag or tags to select objects from XML file
+- `tag` - name of the tag to select objects from XML file, an Array of tag names can be used - when multiple tags are specified stream pushes `{ tag, record }` tuples
 - `highWaterMark` - size of internal transform stream buffer - defaults to 350 objects
 - `strict` - default to false, if `true` makes sax parser to accept valid XML only
 - `trim`, `normalize`, `lowercase`, `xmlns`, `position`, `strictEntities`, `noscript` - passed to [sax] parser
