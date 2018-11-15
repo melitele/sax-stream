@@ -1,6 +1,7 @@
-[![Build Status](https://img.shields.io/travis/melitele/sax-stream.svg)](http://travis-ci.org/melitele/sax-stream)
-[![Dependency Status](https://img.shields.io/gemnasium/code42day/sax-stream.svg)](https://gemnasium.com/code42day/sax-stream)
-[![NPM version](https://img.shields.io/npm/v/sax-stream.svg)](https://www.npmjs.org/package/sax-stream)
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][deps-image]][deps-url]
+[![Dev Dependency Status][deps-dev-image]][deps-dev-url]
 
 # sax-stream
 
@@ -47,3 +48,15 @@ MIT
 
 [transform-stream]: http://nodejs.org/api/stream.html#stream_class_stream_transform
 [sax]: https://github.com/isaacs/sax-js#arguments
+
+[npm-image]: https://img.shields.io/npm/v/sax-stream.svg
+[npm-url]: https://npmjs.org/package/sax-stream
+
+[travis-url]: https://travis-ci.org/melitele/sax-stream
+[travis-image]: https://img.shields.io/travis/melitele/sax-stream.svg
+
+[deps-image]: https://img.shields.io/david/melitele/sax-stream.svg
+[deps-url]: https://david-dm.org/melitele/sax-stream
+
+[deps-dev-image]: https://img.shields.io/david/dev/melitele/sax-stream.svg
+[deps-dev-url]: https://david-dm.org/melitele/sax-stream?type=dev
