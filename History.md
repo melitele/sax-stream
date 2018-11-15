@@ -1,4 +1,9 @@
 
+1.3.0 / 2018-11-15
+==================
+
+ * add multiple tag support to allow use in non-trivial XML files
+
 1.2.3 / 2017-02-15
 ==================
 
