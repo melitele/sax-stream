@@ -34,5 +34,9 @@
   "dependencies": {
     "sax": "~1",
     "debug": "~2"
-  }
+  },
+  "files": [
+    "index.js",
+    "lib"
+  ]
 }
